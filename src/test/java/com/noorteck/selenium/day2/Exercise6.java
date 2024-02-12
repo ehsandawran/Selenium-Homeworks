@@ -73,6 +73,8 @@ public class Exercise6 extends Hooks {
 		System.out.println(messageText);
 
 		tearDown();
+		
+		// Homework complete...
 
 	}
 
