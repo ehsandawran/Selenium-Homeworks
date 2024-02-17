@@ -1,8 +1,7 @@
 package utils;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.safari.SafariDriver;
-
+import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Hooks {
@@ -11,9 +10,9 @@ public class Hooks {
 
 	public static void setUp() {
 
-		WebDriverManager.safaridriver().setup();
+		WebDriverManager.chromedriver().setup();
 
-		driver = new SafariDriver();
+		driver = new ChromeDriver();
 
 		driver.manage().window().maximize();
 
