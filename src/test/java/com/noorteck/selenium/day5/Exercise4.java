@@ -1,6 +1,6 @@
 package com.noorteck.selenium.day5;
 
-import java.util.List;
+//import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,7 +16,7 @@ public class Exercise4 extends Hooks {
 
 		driver.get("https://www.dummyticket.com/");
 
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 
 		driver.findElement(By.xpath(
 				"//a[contains(@class,'btn-w-auto fg-text-light ffb-button1-1')]//span[contains(@class,'btn-text')][normalize-space()='BUY TICKET']"))
@@ -41,14 +41,10 @@ public class Exercise4 extends Hooks {
 		Select selectMnth = new Select(dobMonth);
 		selectMnth.selectByVisibleText("Sep");
 
-		Thread.sleep(2000);
-
 		WebElement dobYear = driver.findElement(By.cssSelector("select.ui-datepicker-year"));
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		Select selectYer = new Select(dobYear);
 		selectYer.selectByVisibleText("1970");
-
-		Thread.sleep(2000);
 
 		driver.findElement(By.cssSelector("tbody tr:nth-child(3) td:nth-child(7) a:nth-child(1)")).click();
 
@@ -88,20 +84,20 @@ public class Exercise4 extends Hooks {
 
 		Thread.sleep(500);
 
-		// driver.findElement(By.xpath("//span[@aria-expanded='true']//b[@role='presentation']")).click();
+		driver.findElement(By.id("select2-reasondummy-container")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//li[text()='Prank a friend']")).click();
 
-		// driver.findElement(By.xpath("//li[text()='Prank a friend']")).click();
+		// WebElement purposeField =
+		// driver.findElement(By.cssSelector("#select2-reasondummy-container"));
+		// purposeField.click();
 
-		/*
-		 * List<WebElement> purposeOptions =
-		 * driver.findElements(By.xpath("//li[@class='select2-results__option']"));
-		 * 
-		 * for (WebElement purpose: purposeOptions) {
-		 * 
-		 * String purposeStr = purpose.getText(); System.out.println(purposeStr);
-		 * if(purposeStr.equals("Prank a friend")) { purpose.click(); } }
-		 * 
-		 */
+		// Thread.sleep(1000);
+
+		// WebElement prank =
+		// driver.findElement(By.id("select2-reasondummy-result-9w9e-6"));
+		// Thread.sleep(100);
+		// prank.click();
 
 		driver.findElement(By.id("deliverymethod_1")).click();
 
@@ -112,6 +108,13 @@ public class Exercise4 extends Hooks {
 		driver.findElement(By.id("billing_email")).sendKeys("balan@gmail.com");
 
 		// TODO select country --> dropdown with span tagname ?????
+		WebElement selectCountry = driver.findElement(By.id("select2-billing_country-container"));
+		selectCountry.click();
+		Thread.sleep(1000);
+		WebElement selectUS = driver.findElement(By.xpath("//li[text()='United States (US)']"));
+		selectUS.click();
+		// Actions actions = new Actions(driver);
+		// actions.click(selectUS).build().perform();
 
 		driver.findElement(By.id("billing_address_1")).sendKeys("123 way drive");
 
@@ -120,12 +123,32 @@ public class Exercise4 extends Hooks {
 		driver.findElement(By.id("billing_city")).sendKeys("Reston");
 
 		// TODO select state ??????
-		
+		driver.findElement(By.id("select2-billing_state-container")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//li[text()='Virginia']")).click();
+
 		driver.findElement(By.id("billing_postcode")).sendKeys("20190");
-		
+
 		driver.findElement(By.id("payment_method_paypal")).click();
-		
-		Thread.sleep(3000);
+
+		Thread.sleep(1000);
+
+		driver.findElement(By.id("place_order")).click();
+
+		Thread.sleep(1000);
+
+		driver.findElement(By.linkText("Cancel and return to KTINI")).click();
+
+		String finalMessage = driver
+				.findElement(By.xpath("/html/body/div[1]/div/div/section[2]/div/div/div/div/div[1]")).getText();
+		System.out.println(finalMessage);
+		finalMessage.trim();
+
+		if (finalMessage.equals("Your order was cancelled.")) {
+			System.out.println("TESTCAE PASSED");
+		} else {
+			System.out.println("TESTCASE FAILED");
+		}
 
 		tearDown();
 
