@@ -88,17 +88,6 @@ public class Exercise4 extends Hooks {
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//li[text()='Prank a friend']")).click();
 
-		// WebElement purposeField =
-		// driver.findElement(By.cssSelector("#select2-reasondummy-container"));
-		// purposeField.click();
-
-		// Thread.sleep(1000);
-
-		// WebElement prank =
-		// driver.findElement(By.id("select2-reasondummy-result-9w9e-6"));
-		// Thread.sleep(100);
-		// prank.click();
-
 		driver.findElement(By.id("deliverymethod_1")).click();
 
 		driver.findElement(By.id("billname")).sendKeys("Barry");
